@@ -29,6 +29,9 @@ export default Vue.extend({
     ...mapState({
       personalobj: (state: any) => state.index.personalObj
     })
+  },
+  methods:{
+    
   }
 });
 </script>
