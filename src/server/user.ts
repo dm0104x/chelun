@@ -9,3 +9,14 @@ export function homePageList() {
     }
   });
 }
+
+export function SelectImage() {
+  return request({
+    url: "/v2-car-getImageList.html",
+    method: "GET",
+    params: {
+      SerialID: 4908,
+      _1563280706100: ""
+    }
+  });
+}
