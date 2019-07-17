@@ -1,9 +1,14 @@
 <template>
   <div>
-    <div class="right_wrapper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-      <div v-for="(item,index) in dataRightList" :key="index">{{item}}</div>
+    <div class="right_wrapper"
+         @touchstart="touchStart"
+         @touchmove="touchMove"
+         @touchend="touchEnd">
+      <div v-for="(item,index) in dataRightList"
+           :key="index">{{item}}</div>
     </div>
-    <span v-if="isTouch" class="letter">{{current}}</span>
+    <span v-if="isTouch"
+          class="letter">{{current}}</span>
   </div>
 </template>
 <script lang="ts">
@@ -52,7 +57,7 @@ export default Vue.extend({
       if (letterIndex > this.dataRightList.length - 1) {
         letterIndex = this.dataRightList.length - 1;
       }
-      this.$emit("update:current", this.dataRightList[letterIndex]);
+      this.$emit("update:current", this.dataRightList[letterIndex - 2]);
     },
     touchEnd(e: Event): void {
       this.isTouch = false;

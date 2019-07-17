@@ -5,7 +5,7 @@
          :key="index">
       <p class="brand"
          :ref="item.name">{{item.name}}</p>
-      <ul>
+      <ul class="topsa">
         <li v-for="(value) in item.children"
             :key="value.MasterID"
             class="border-bottom"
@@ -94,5 +94,9 @@ li {
   &:last-child:after {
     display: none;
   }
+}
+.topsa {
+  padding: 0.2rem;
+  box-sizing: border-box;
 }
 </style>

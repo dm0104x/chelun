@@ -221,6 +221,7 @@ footer {
     height: 1.65rem;
     border-bottom: 1px solid #eee;
     > label {
+      width: 100%;
       display: flex;
       height: 100%;
     }
