@@ -1,14 +1,22 @@
 <template>
   <div class="left">
-    <div class="list">
-      <div class="list_left" v-for="(item,index) in dataRightList" :key="index" :id="item.name">
+    <div class="list"
+         @scroll="scroll()">
+      <div class="list_left"
+           v-for="(item,index) in dataRightList"
+           :key="index"
+           :ref="item.name">
         <div class="list_lefts">
           <p>{{item.name}}</p>
-          <div v-for="(item,index) in item.children" :key="index" class="list_title">
+          <div v-for="(items,index) in item.children"
+               :key="index"
+               class="list_title"
+               @click="detailRight(items.MasterID)">
             <div class="list_img">
-              <img :src="item.CoverPhoto" alt />
+              <img :src="items.CoverPhoto"
+                   alt />
             </div>
-            <div class="list_titles">{{item.Name}}</div>
+            <div class="list_titles">{{items.Name}}</div>
           </div>
         </div>
       </div>
@@ -17,39 +25,54 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { mapState } from "vuex";
-export default Vue.extend({
-  data() {
-    return {};
-  },
+import { mapState, mapActions, mapMutations } from "vuex";
+@Component({
   computed: {
     ...mapState({
       dataRightList: (state: any) => state.index.dataLeft
     })
   },
-  methods: {}
-});
+  created() {},
+  methods: {
+    ...mapActions("index", ["RightList"]),
+    ...mapMutations("index", ["flag"]),
+    scroll(event) {},
+    detailRight(id) {
+      let { RightList, flag }: any = this;
+      RightList({
+        MasterID: id
+      });
+      flag(true);
+      console.log(id);
+    }
+  },
+  updated() {}
+})
+export default class Home extends Vue {}
 </script>
-
 <style lang="scss">
 .left {
   width: 100%;
-  font-size: 0.3rem;
+  height: 100%;
   .list {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
     .list_left {
       width: 100%;
+
       .list_lefts {
         width: 100%;
         p {
           width: 100%;
-          height: 0.4rem;
+          height: 0.8rem;
           background: #ddd;
-          line-height: 0.4rem;
-          padding-left: 0.2rem;
+          line-height: 0.8rem;
+          padding-left: 0.5rem;
           box-sizing: border-box;
+          color: #666;
         }
       }
       .list_title {
@@ -60,12 +83,13 @@ export default Vue.extend({
         margin: 0 auto;
         .list_img {
           width: 20%;
-          height: 1rem;
-          text-align: center;
-          line-height: 1.5rem;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           img {
-            width: 70%;
-            height: 70%;
+            width: 65%;
+            height: 85%;
           }
         }
         .list_titles {
