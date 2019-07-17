@@ -31,7 +31,8 @@ export default Vue.extend({
   },
   methods: {
     touchStart(e: Event): void {
-      let pageY = e.touches[0].pageY;
+      let str: any = e.touches[0];
+      let pageY = str.pageY;
       let letterHeight = ((0.4 * window.innerWidth) / 750) * 100;
       let letterOffsetTop =
         (window.innerHeight - letterHeight * this.dataRightList.length) / 2;
