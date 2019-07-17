@@ -146,6 +146,10 @@ export default Vue.extend({
   height: 1rem;
   color: #fff;
   text-align: center;
+
+  p {
+    line-height: 0.5rem;
+  }
 }
 .imgTops {
   width: 100%;
