@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <SelectImage />
+    <Home/>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-import SelectImage from "@/views/SelectImage.vue";
+// import Home from "@/views/Home.vue";
 import Home from "@/views/Home.vue";
 export default Vue.extend({
   components: {
-    SelectImage
+    Home
   }
 });
 </script>
