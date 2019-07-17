@@ -9,14 +9,27 @@ export function homePageList() {
     }
   });
 }
-
-export function SelectImage() {
+//进入图片页面
+export function SelectImage(options:any) {
   return request({
     url: "/v2-car-getImageList.html",
     method: "GET",
     params: {
-      SerialID: 4908,
+      SerialID: options,
       _1563280706100: ""
+    }
+  })
+}
+//进入Swiper页面
+export function SwiperImage(options:any) {
+  return request({
+    url: "/v2-car-getCategoryImageList.html",
+    method: "GET",
+    params: {
+      SerialID: options,
+      ImageID:6,
+      Page:1,
+      PageSize:30
     }
   })
 }

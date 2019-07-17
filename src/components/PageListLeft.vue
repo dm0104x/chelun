@@ -1,105 +1,96 @@
 <template>
-  <div class="left">
-    <div class="list"
-         @scroll="scroll()">
-      <div class="list_left"
-           v-for="(item,index) in dataRightList"
-           :key="index"
-           :ref="item.name">
-        <div class="list_lefts">
-          <p>{{item.name}}</p>
-          <div v-for="(items,index) in item.children"
-               :key="index"
-               class="list_title"
-               @click="detailRight(items.MasterID)">
-            <div class="list_img">
-              <img :src="items.CoverPhoto"
-                   alt />
-            </div>
-            <div class="list_titles">{{items.Name}}</div>
-          </div>
-        </div>
-      </div>
+  <div class="brand-list" ref="scrollEle">
+    <div v-for="(item, index) in dataRightList" :key="index">
+      <p class="brand" :ref="item.name">{{item.name}}</p>
+      <ul>
+        <li
+          v-for="(value) in item.children"
+          :key="value.MasterID"
+          class="border-bottom"
+          @click="detailRight(value.MasterID)"
+        >
+          <img :src="value.CoverPhoto" :alt="value.Name" />
+          <span>{{value.Name}}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { mapState, mapActions, mapMutations } from "vuex";
-@Component({
+export default Vue.extend({
   computed: {
     ...mapState({
       dataRightList: (state: any) => state.index.dataLeft
     })
   },
+  props: {
+    data: {
+      type: Object,
+      value: {}
+    },
+    current: {
+      type: String,
+      value: ""
+    }
+  },
+  watch: {
+    current(val) {
+      if (val) {
+        console.log(val);
+        // this.$refs.scrollEle.scrollTop = 1000;
+        // console.log(this.$refs[val][0].offsetTop);
+        this.$refs.scrollEle.scrollTop = this.$refs[val][0].offsetTop;
+        // console.log(this.$refs.scrollEle.scrollTop);
+      }
+    }
+  },
   created() {},
   methods: {
     ...mapActions("index", ["RightList"]),
     ...mapMutations("index", ["flag"]),
-    scroll(event) {},
     detailRight(id) {
       let { RightList, flag }: any = this;
       RightList({
         MasterID: id
       });
       flag(true);
-      console.log(id);
     }
   },
   updated() {}
-})
-export default class Home extends Vue {}
+});
 </script>
 <style lang="scss">
-.left {
-  width: 100%;
+@import "../scss/global.scss";
+.brand-list {
   height: 100%;
-  .list {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    .list_left {
-      width: 100%;
-
-      .list_lefts {
-        width: 100%;
-        p {
-          width: 100%;
-          height: 0.8rem;
-          background: #ddd;
-          line-height: 0.8rem;
-          padding-left: 0.5rem;
-          box-sizing: border-box;
-          color: #666;
-        }
-      }
-      .list_title {
-        width: 90%;
-        height: 1rem;
-        display: flex;
-        border-bottom: 0.01rem solid #ddd;
-        margin: 0 auto;
-        .list_img {
-          width: 20%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          img {
-            width: 65%;
-            height: 85%;
-          }
-        }
-        .list_titles {
-          width: 80%;
-          height: 100%;
-          line-height: 1rem;
-          margin-left: 0.3rem;
-        }
-      }
-    }
+  overflow-y: scroll;
+}
+.brand {
+  font-size: 0.28rem;
+  line-height: 0.4rem;
+  padding-left: 0.3rem;
+  color: #aaa;
+}
+ul {
+  padding: 0 0.3rem;
+  background: #fff;
+}
+li {
+  height: $brand-height;
+  line-height: $brand-height;
+  display: flex;
+  align-items: center;
+  img {
+    height: 0.8rem;
+  }
+  span {
+    font-size: 0.32rem;
+    margin-left: 0.4rem;
+  }
+  &:last-child:after {
+    display: none;
   }
 }
 </style>

@@ -1,16 +1,17 @@
 <template>
-  <div class="wrapper_right"
-       v-if="all"
-       :class="flags===true?'active':'active1'">
+  <div class="wrapper_right" v-if="all" :class="flags===true?'active':'active1'">
     <div class="right">
-      <div v-for="(item,index) in rightList">
-        <p class="title"
-           @click="draw">{{item.GroupName}}</p>
-        <div v-for="(items,ind) in item.GroupList"
-             class="dataList"
-             @click="idcanvas(items.SerialID)">
-          <div class="img"><img :src="items.CoverPhoto"
-                 :alt="items.AliasName"></div>
+      <div v-for="(item,index) in rightList" :key="index">
+        <p class="title" @click="draw">{{item.GroupName}}</p>
+        <div
+          v-for="(items,ind) in item.GroupList"
+          :key="ind"
+          class="dataList"
+          @click="idcanvas(items.SerialID)"
+        >
+          <div class="img">
+            <img :src="items.CoverPhoto" :alt="items.AliasName" />
+          </div>
           <div class="all">
             <p>{{items.AliasName}}</p>
             <p>{{items.DealerPrice}}</p>

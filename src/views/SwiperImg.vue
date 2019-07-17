@@ -1,7 +1,7 @@
 <template>
   <div class="box">
-    <div v-for="(item,index) in SelectImage" :key="index" class="list">
-      <div class="list_title">
+    <div v-for="(item,index) in SwiperImage" :key="index" class="list">
+      <!-- <div class="list_title">
         <div>{{item.Name}}</div>
         <div>{{item.Count}}张图片</div>
       </div>
@@ -15,7 +15,7 @@
           :src="items.Url.split('{')[0]+'3'+items.Url.split('{')[1].split('}')[1]"
           :alt="items.Url"
         />
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -27,15 +27,15 @@ export default Vue.extend({
     return {};
   },
   created() {
-    let { SelectImages } = this;
-    SelectImages(this.$route.query.id);
+    let { SwiperImages } = this;
+    SwiperImages(this.$route.query.id);
   },
   methods: {
-    ...mapActions("index", ["SelectImages"])
+    ...mapActions("index", ["SwiperImages"])
   },
   computed: {
     ...mapState({
-      SelectImage: (state: any) => state.index.Images
+      SwiperImage: (state: any) => state.index.Swiper
     })
   }
 });
@@ -51,12 +51,12 @@ export default Vue.extend({
     position: relative;
     .list_title {
       width: 32%;
-      height: 48%;;
+      height: 48%;
       position: absolute;
       left: 0;
       top: 0;
       text-align: center;
-      line-height: .9rem;
+      line-height: 0.9rem;
       color: aliceblue;
       div {
         font-size: 0.4rem;

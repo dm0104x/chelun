@@ -3,7 +3,7 @@
     <div class="content"
          v-if="rightdetail">
       <!-- 头部图片 -->
-      <div class="imgTops">
+      <div class="imgTops" @click="Swiper(rightdetail.SerialID)">
         <img :src="rightdetail.CoverPhoto"
              :alt="rightdetail.AliasName">
         <span class="page">{{rightdetail.pic_group_count}}张照片</span>
@@ -21,10 +21,11 @@
       <div class="stips">
         <div class="wrap_cont_t">
           <span v-for="(item,ind) in arrList"
+                :key="ind"
                 :class="index==ind?'topactive':null"
                 @click="topIndex(ind)">{{item}}</span>
         </div>
-        <template v-for="(item,ind) in rightdetail.list">
+        <template v-for="(item) in rightdetail.list">
           <div v-if="arrList[index]==item.market_attribute.year">
             <div class="wrap_cont_engine">
               <p>{{item.exhaust_str}}/{{item.max_power_str}} {{item.inhale_type}}</p>
@@ -96,8 +97,7 @@ export default Vue.extend({
         let arr = state.index.rightdetail;
         let arrs: any = [];
         arrs =
-          arr &&
-          arr.list.map((el: any) => {
+          arr && arr.list.map((el: any) => {
             return el.market_attribute.year;
           });
         arrs.unshift("全部");
@@ -126,6 +126,9 @@ export default Vue.extend({
           }
         });
       });
+    },
+    Swiper(id:number){
+       this.$router.push({ path: `/SelectImage?id=${id}` });
     }
   }
 });

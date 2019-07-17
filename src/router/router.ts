@@ -4,6 +4,9 @@ import Home from '../views/Home.vue'
 import Car from '../views/Car.vue'
 import Personal from '../views/Personal.vue'
 import Type from '../views/Type.vue'
+import SelectImage from '../views/SelectImage.vue'
+import SwiperImg from '../views/SwiperImg.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,14 +24,24 @@ export default new Router({
       component: Car
     },
     {
-      path: '/personal',
-      name: 'personal',
+      path: '/Personal',
+      name: 'Personal',
       component: Personal
     },
     {
       path: '/type',
       name: 'type',
       component: Type
-    }
+    },
+    {
+      path: '/SelectImage',
+      name: 'SelectImage',
+      component: SelectImage
+    },
+    {
+      path: '/SwiperImg',
+      name: 'SwiperImg',
+      component: SwiperImg
+    },
   ]
 })

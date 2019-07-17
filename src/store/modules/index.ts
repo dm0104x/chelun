@@ -1,4 +1,4 @@
-import { homePageList, RightList, RightDetail, regionId, personal, addressListFn } from '../../server/user'
+import { homePageList, RightList, RightDetail, regionId, personal, addressListFn,SelectImage,SwiperImage } from '../../server/user'
 const state = {
   dataRight: [],
   dataLeft: [],
@@ -10,14 +10,15 @@ const state = {
   personalObj: {},
   regionidObj: {},
   addressListArr: [],
-  addressShi: []
+  addressShi: [],
+  SwiperImg:[]
 }
 const actions = {
   // 首页列表数据
   async pageList({ commit }: any, options: void) {
     let data = await homePageList();
     let arr: any[] = [];
-    let top: any[] = []
+    let top: any[] = [];
     data.data.forEach((element: any) => {
       arr.push(element.Spelling.slice(0, 1))
     });
@@ -38,10 +39,16 @@ const actions = {
     commit("pageListRight", [...new Set(arr)])
     commit("pageListLeft", [...new Set(top)])
   },
+  //进入图片页面
   async SelectImages({ commit }: any, options: any) {
     let Images = await SelectImage(options)
     commit("SelectImagess", Images.data)
     commit("pageListLeft", top)
+  },
+  //进入Swiper页面
+  async SwiperImages({ commit }: any, options: any) {
+    let Swiper = await SwiperImage(options)
+    commit("SwiperImage", Swiper.data)
   },
   // 右边列表数据
   async RightList({ commit }: any, options: void) {
@@ -95,6 +102,9 @@ const mutations = {
   },
   rightDetail(state: any, options: any) {
     state.rightdetail = options
+  },
+  SwiperImage(state: any, options: any) {
+    state.SwiperImage = options
   },
   personalfn(state: any, options: any) {
     state.personalObj = options

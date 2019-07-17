@@ -1,14 +1,9 @@
 <template>
   <div>
-    <div class="right_wrapper"
-         @touchstart="touchStart"
-         @touchmove="touchMove"
-         @touchend="touchEnd">
-      <div v-for="(item,index) in dataRightList"
-           :key="index">{{item}}</div>
+    <div class="right_wrapper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+      <div v-for="(item,index) in dataRightList" :key="index">{{item}}</div>
     </div>
-    <span v-if="isTouch"
-          class="letter">{{current}}</span>
+    <span v-if="isTouch" class="letter">{{current}}</span>
   </div>
 </template>
 <script lang="ts">
@@ -17,9 +12,18 @@ import { mapState } from "vuex";
 export default Vue.extend({
   data() {
     return {
-      current: "",
       isTouch: false
     };
+  },
+  props: {
+    data: {
+      type: Array,
+      value: []
+    },
+    current: {
+      type: String,
+      value: ""
+    }
   },
   computed: {
     ...mapState({
@@ -31,14 +35,8 @@ export default Vue.extend({
   },
   methods: {
     touchStart(e: Event): void {
-      let str: any = e.touches[0];
-      let pageY = str.pageY;
-      let letterHeight = ((0.4 * window.innerWidth) / 750) * 100;
-      let letterOffsetTop =
-        (window.innerHeight - letterHeight * this.dataRightList.length) / 2;
-      let letterIndex = Math.floor((pageY - letterOffsetTop) / letterHeight);
-      this.current = this.dataRightList[letterIndex];
       this.isTouch = true;
+      this.touchMove(e);
     },
     touchMove(e: Event): void {
       let pageY = e.touches[0].pageY;
@@ -54,11 +52,11 @@ export default Vue.extend({
       if (letterIndex > this.dataRightList.length - 1) {
         letterIndex = this.dataRightList.length - 1;
       }
-      this.current = this.dataRightList[letterIndex];
+      this.$emit("update:current", this.dataRightList[letterIndex]);
     },
     touchEnd(e: Event): void {
       this.isTouch = false;
-      this.current = "";
+      this.$emit("update:current", "");
     }
   }
 });

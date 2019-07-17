@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <PageListLeft />
-    <PageListRight />
+    <PageListLeft  :current="current" />
+    <PageListRight  :current.sync="current" />
     <RightDetail />
   </div>
 </template>
@@ -15,7 +15,9 @@ import RightDetail from "@/components/RightDetail.vue"; // @ is an alias to /src
 import { mapActions } from "vuex";
 export default Vue.extend({
   data() {
-    return {};
+    return {
+      current:''
+    };
   },
   created() {
     this.pageList();
