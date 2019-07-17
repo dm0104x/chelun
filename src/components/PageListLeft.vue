@@ -1,81 +1,96 @@
 <template>
-  <div class="left">
-    <div class="list">
-      <div class="list_left" v-for="(item,index) in dataRightList" :key="index" :id="item.name">
-        <div class="list_lefts">
-          <p>{{item.name}}</p>
-          <div v-for="(item,index) in item.children" :key="index" class="list_title">
-            <div class="list_img">
-              <img :src="item.CoverPhoto" alt />
-            </div>
-            <div class="list_titles">{{item.Name}}</div>
-          </div>
-        </div>
-      </div>
+  <div class="brand-list" ref="scrollEle">
+    <div v-for="(item, index) in dataRightList" :key="index">
+      <p class="brand" :ref="item.name">{{item.name}}</p>
+      <ul>
+        <li
+          v-for="(value) in item.children"
+          :key="value.MasterID"
+          class="border-bottom"
+          @click="detailRight(value.MasterID)"
+        >
+          <img :src="value.CoverPhoto" :alt="value.Name" />
+          <span>{{value.Name}}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { mapState } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 export default Vue.extend({
-  data() {
-    return {};
-  },
   computed: {
     ...mapState({
       dataRightList: (state: any) => state.index.dataLeft
     })
   },
-  methods: {}
-});
-</script>
-
-<style lang="scss">
-.left {
-  width: 100%;
-  font-size: 0.3rem;
-  .list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    .list_left {
-      width: 100%;
-      .list_lefts {
-        width: 100%;
-        p {
-          width: 100%;
-          height: 0.4rem;
-          background: #ddd;
-          line-height: 0.4rem;
-          padding-left: 0.2rem;
-          box-sizing: border-box;
-        }
-      }
-      .list_title {
-        width: 90%;
-        height: 1rem;
-        display: flex;
-        border-bottom: 0.01rem solid #ddd;
-        margin: 0 auto;
-        .list_img {
-          width: 20%;
-          height: 1rem;
-          text-align: center;
-          line-height: 1.5rem;
-          img {
-            width: 70%;
-            height: 70%;
-          }
-        }
-        .list_titles {
-          width: 80%;
-          height: 100%;
-          line-height: 1rem;
-          margin-left: 0.3rem;
-        }
+  props: {
+    data: {
+      type: Object,
+      value: {}
+    },
+    current: {
+      type: String,
+      value: ""
+    }
+  },
+  watch: {
+    current(val) {
+      if (val) {
+        console.log(val);
+        // this.$refs.scrollEle.scrollTop = 1000;
+        // console.log(this.$refs[val][0].offsetTop);
+        this.$refs.scrollEle.scrollTop = this.$refs[val][0].offsetTop;
+        // console.log(this.$refs.scrollEle.scrollTop);
       }
     }
+  },
+  created() {},
+  methods: {
+    ...mapActions("index", ["RightList"]),
+    ...mapMutations("index", ["flag"]),
+    detailRight(id) {
+      let { RightList, flag }: any = this;
+      RightList({
+        MasterID: id
+      });
+      flag(true);
+    }
+  },
+  updated() {}
+});
+</script>
+<style lang="scss">
+@import "../scss/global.scss";
+.brand-list {
+  height: 100%;
+  overflow-y: scroll;
+}
+.brand {
+  font-size: 0.28rem;
+  line-height: 0.4rem;
+  padding-left: 0.3rem;
+  color: #aaa;
+}
+ul {
+  padding: 0 0.3rem;
+  background: #fff;
+}
+li {
+  height: $brand-height;
+  line-height: $brand-height;
+  display: flex;
+  align-items: center;
+  img {
+    height: 0.8rem;
+  }
+  span {
+    font-size: 0.32rem;
+    margin-left: 0.4rem;
+  }
+  &:last-child:after {
+    display: none;
   }
 }
 </style>
