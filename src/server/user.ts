@@ -45,3 +45,12 @@ export function personal(options: any) {
     params: options
   });
 }
+
+//获取地区列表数据
+export function addressListFn(options: any) {
+  return request({
+    url: "/v1-city-alllist.html",
+    method: "GET",
+    params: options
+  });
+}

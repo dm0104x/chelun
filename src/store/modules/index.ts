@@ -1,4 +1,4 @@
-import { homePageList, RightList, RightDetail, regionId, personal } from '../../server/user'
+import { homePageList, RightList, RightDetail, regionId, personal, addressListFn } from '../../server/user'
 const state = {
   dataRight: [],
   dataLeft: [],
@@ -6,7 +6,10 @@ const state = {
   all: false,
   rightList: [],
   rightdetail: {},
-  personalObj: {}
+  personalObj: {},
+  regionidObj: {},
+  addressListArr: [],
+  addressShi: []
 }
 const actions = {
   // 首页列表数据
@@ -47,6 +50,7 @@ const actions = {
   //地区id
   async regionid({ commit }: any, options: void) {
     let data = await regionId(options)
+    commit('regionidfn', data.data)
     return data;
   },
   //个人页面详情数据
@@ -54,6 +58,16 @@ const actions = {
     let data = await personal(options)
     commit('personalfn', data.data)
     return data;
+  },
+  //地区列表数据
+  async addressFn({ commit }: any, options: any) {
+    let data = await addressListFn(options)
+    if (options) {
+      commit('addressfn', data.data)
+    } else {
+      commit('addressfn1', data.data)
+    }
+
   }
 }
 
@@ -77,6 +91,15 @@ const mutations = {
   personalfn(state: any, options: any) {
     state.personalObj = options
   },
+  regionidfn(state: any, options: any) {
+    state.regionidObj = options
+  },
+  addressfn(state: any, options: any) {
+    state.addressShi = options
+  },
+  addressfn1(state: any, options: any) {
+    state.addressListArr = options
+  }
 }
 
 export default {

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Car from '../views/Car.vue'
 import Personal from '../views/Personal.vue'
-
+import Type from '../views/Type.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +24,11 @@ export default new Router({
       path: '/personal',
       name: 'personal',
       component: Personal
+    },
+    {
+      path: '/type',
+      name: 'type',
+      component: Type
     }
   ]
 })

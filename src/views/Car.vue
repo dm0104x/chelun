@@ -36,7 +36,7 @@
                 <div class="wrap_cont_versions_price_left"></div>
                 <div class="wrap_cont_versions_price_right">
                   <div class="wrap_cont_versions_price_right_l">指导价 {{item.market_attribute.dealer_price_max}}</div>
-                  <div class="wrap_cont_versions_price_right_r">{{item.market_attribute.dealer_price_min}}起</div>
+                  <div class="wrap_cont_versions_price_right_r">{{item.market_attribute.dealer_price_min?item.market_attribute.dealer_price_min:'暂无'}}</div>
                 </div>
               </div>
               <div class="wrap_cont_versions_inquiry"
@@ -54,7 +54,7 @@
                 <div class="wrap_cont_versions_price_left"></div>
                 <div class="wrap_cont_versions_price_right">
                   <div class="wrap_cont_versions_price_right_l">指导价 {{item.market_attribute.dealer_price_max}}</div>
-                  <div class="wrap_cont_versions_price_right_r">{{item.market_attribute.dealer_price_min}}起</div>
+                  <div class="wrap_cont_versions_price_right_r">{{item.market_attribute.dealer_price_min?item.market_attribute.dealer_price_min:'暂无'}}</div>
                 </div>
               </div>
               <div class="wrap_cont_versions_inquiry"
