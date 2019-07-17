@@ -160,16 +160,17 @@ export default Vue.extend({
       let str: any = "";
       let name: any = this.name;
       let nameText: any = "";
-      if (this.phone.length === 11) {
-        str = this.phone;
-      } else {
-        alert("请输入正确的手机号");
-        return;
-      }
       if (isNaN(name)) {
         nameText = name;
       } else {
         alert("参数不对");
+        return;
+      }
+
+      if (this.phone.length === 11) {
+        str = this.phone;
+      } else {
+        alert("请输入正确的手机号");
         return;
       }
 

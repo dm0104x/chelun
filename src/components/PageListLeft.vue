@@ -1,15 +1,17 @@
 <template>
-  <div class="brand-list" ref="scrollEle">
-    <div v-for="(item, index) in dataRightList" :key="index">
-      <p class="brand" :ref="item.name">{{item.name}}</p>
+  <div class="brand-list"
+       ref="scrollEle">
+    <div v-for="(item, index) in dataRightList"
+         :key="index">
+      <p class="brand"
+         :ref="item.name">{{item.name}}</p>
       <ul>
-        <li
-          v-for="(value) in item.children"
-          :key="value.MasterID"
-          class="border-bottom"
-          @click="detailRight(value.MasterID)"
-        >
-          <img :src="value.CoverPhoto" :alt="value.Name" />
+        <li v-for="(value) in item.children"
+            :key="value.MasterID"
+            class="border-bottom"
+            @click="detailRight(value.MasterID)">
+          <img :src="value.CoverPhoto"
+               :alt="value.Name" />
           <span>{{value.Name}}</span>
         </li>
       </ul>
@@ -50,7 +52,7 @@ export default Vue.extend({
   methods: {
     ...mapActions("index", ["RightList"]),
     ...mapMutations("index", ["flag"]),
-    detailRight(id) {
+    detailRight(id: any) {
       let { RightList, flag }: any = this;
       RightList({
         MasterID: id
