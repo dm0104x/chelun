@@ -57,15 +57,19 @@ export default Vue.extend({
       this.index = index;
     },
     replace(id: any) {
-      this.personalFn({
-        carId: id,
-        cityId: this.$route.query.address
-      }).then((res: any) => {
-        console.log(res);
-        if (res.code === 1) {
-          this.$router.back(-1);
-        }
-      });
+      if (this.$route.query.address) {
+        this.personalFn({
+          carId: id,
+          cityId: this.$route.query.address
+        }).then((res: any) => {
+          console.log(res);
+          if (res.code === 1) {
+            this.$router.back(-1);
+          }
+        });
+      } else {
+        alert(111);
+      }
     }
   }
 });
