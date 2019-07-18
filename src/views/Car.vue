@@ -88,7 +88,6 @@ export default Vue.extend({
     Rightdetail({
       SerialID: this.$route.query.id
     });
-    console.log(this);
   },
   computed: {
     ...mapState({

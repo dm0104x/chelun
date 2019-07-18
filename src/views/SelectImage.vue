@@ -61,7 +61,11 @@ export default Vue.extend({
     ...mapState({
       SelectImage: (state: any) => state.index.Images,
       rightdetails: (state: any) => state.index.rightdetail,
-      personalobj: (state: any) => state.index.personalObj
+      personalobj: (state: any) => state.index.personalObj,
+      chooseTheColor: (state: any) => state.index.chooseTheColor,
+      getModelImageYearColor: (state: any) =>
+        state.index.getModelImageYearColor,
+      Vehiclecolor: (state: any) => state.index.Vehiclecolor
     })
   }
 });

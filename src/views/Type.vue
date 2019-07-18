@@ -1,11 +1,14 @@
 <template>
   <div class="wrapper_items">
+    <div class="allColor"
+         v-if="!this.$route.query.address">全部车款</div>
     <div class="wrap_cont_t">
       <span v-for="(item,ind) in arrList"
+            :key="ind"
             :class="index==ind?'topactive':null"
             @click="topIndex(ind)">{{item}}</span>
     </div>
-    <template v-for="(item,ind) in rightdetail.list">
+    <template v-for="(item) in rightdetail.list">
       <div v-if="arrList[index]==item.market_attribute.year">
         <p class="Information">{{item.exhaust_str}}/{{item.max_power_str}} {{item.inhale_type}}</p>
         <div class="coents_items"
@@ -118,6 +121,17 @@ export default Vue.extend({
       line-height: 0.5rem;
     }
   }
+}
+.allColor {
+  width: 100%;
+  height: 0.8rem;
+  text-align: center;
+  line-height: 0.8rem;
+  margin: 0.15rem 0;
+  color: #00afff;
+  font-weight: 500;
+  font-size: 0.34rem;
+  background: #fff;
 }
 .Information {
   width: 100%;

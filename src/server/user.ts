@@ -20,6 +20,17 @@ export function SelectImage(options:any) {
     }
   })
 }
+//进入选择颜色岩棉
+export function getModelImageYearColor(options:any) {
+  return request({
+    url: "/v2-car-getModelImageYearColor.html",
+    method: "GET",
+    params: {
+      SerialID: options,
+      _1563437330946:""
+    }
+  })
+}
 //进入Swiper页面
 export function SwiperImage(options:any) {
   return request({
@@ -31,6 +42,26 @@ export function SwiperImage(options:any) {
       Page:1,
       PageSize:30
     }
+  })
+}
+//选择车辆颜色
+export function Vehiclecolor(options:any) {
+  return request({
+    url: "/v2-car-getModelImageYearColor.html",
+    method: "GET",
+    params: {
+      SerialID: options,
+      _1563437330946:""
+    }
+  })
+}
+//
+export function chooseTheColor(params:any) {
+  console.log(params)
+  return request({
+    url: "/v2-car-getImageList.html",
+    method: "GET",
+    params
   })
 }
 //获取右边列表数据
