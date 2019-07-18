@@ -6,6 +6,7 @@ import Personal from '../views/Personal.vue'
 import Type from '../views/Type.vue'
 import SelectImage from '../views/SelectImage.vue'
 import SwiperImg from '../views/SwiperImg.vue'
+import Color from '../views/Color.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/SwiperImg',
       name: 'SwiperImg',
       component: SwiperImg
+    },
+    {
+      path: '/Color',
+      name: 'Color',
+      component: Color
     },
   ]
 })

@@ -1,4 +1,4 @@
-import { homePageList, RightList, RightDetail, regionId, personal, addressListFn,SelectImage,SwiperImage } from '../../server/user'
+import { homePageList, RightList, RightDetail, regionId, personal, addressListFn,SelectImage,SwiperImage,Vehiclecolor,chooseTheColor,getModelImageYearColor } from '../../server/user'
 const state = {
   dataRight: [],
   dataLeft: [],
@@ -11,7 +11,10 @@ const state = {
   regionidObj: {},
   addressListArr: [],
   addressShi: [],
-  SwiperImg:[]
+  SwiperImage:[],
+  Vehiclecolor:[],
+  chooseTheColors:[],
+  getModelImageYearColor:[]
 }
 const actions = {
   // 首页列表数据
@@ -47,8 +50,26 @@ const actions = {
   },
   //进入Swiper页面
   async SwiperImages({ commit }: any, options: any) {
-    let Swiper = await SwiperImage(options)
-    commit("SwiperImage", Swiper.data)
+    console.log(options)
+    let data = await SwiperImage(options)
+    commit("SwiperImage", data.data)
+  },
+  //选择车辆颜色
+  async Vehiclecolors({ commit }: any, options: any) {
+    console.log(options)
+    let data = await Vehiclecolor(options)
+    commit("Vehiclecolor", data.data)
+  },
+  //选择车辆颜色
+  async chooseTheColors({ commit }: any, options: any) {
+    console.log(options)
+    let data = await chooseTheColor(options)
+    commit("chooseTheColor", data.data)
+  },
+  async getModelImageYearColors({ commit }: any, options: any) {
+    console.log(options)
+    let data = await getModelImageYearColor(options)
+    commit("getModelImageYearColor", data.data)
   },
   // 右边列表数据
   async RightList({ commit }: any, options: void) {
@@ -58,7 +79,8 @@ const actions = {
   // 详情页面数据
   async Rightdetail({ commit }: any, options: void) {
     let data = await RightDetail(options)
-    commit('rightDetail', data.data)
+    commit('rightDetail', data.data,options)
+
   },
   //地区id
   async regionid({ commit }: any, options: void) {
@@ -103,8 +125,17 @@ const mutations = {
   rightDetail(state: any, options: any) {
     state.rightdetail = options
   },
+  getModelImageYearColor(state: any, options: any) {
+    state.getModelImageYearColor = options
+  },
   SwiperImage(state: any, options: any) {
     state.SwiperImage = options
+  },
+  chooseTheColors(state: any, options: any) {
+    state.chooseTheColors = options
+  },
+  Vehiclecolor(state: any, options: any) {
+    state.Vehiclecolor = options
   },
   personalfn(state: any, options: any) {
     state.personalObj = options

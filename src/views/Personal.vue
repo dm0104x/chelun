@@ -35,7 +35,7 @@
         <li v-for="(item,i) in personalobj.list"
             :key="i"
             @click="changeaddress(item.dealerId)">
-          <label :for="i">
+          <label :for="i" style="width:100%;">
             <div>
               <input type="checkbox"
                      :id="i">
@@ -63,7 +63,7 @@
       <div class="toaddre">
         <ul>
           <li class="addressList1"
-              v-for="(item,i) in addressListArr"
+              v-for="(item,i) in addressListArr" :key="i"
               @click="addressA(item.CityID)">{{item.CityName}}</li>
         </ul>
         <div class="chidren"
@@ -76,7 +76,7 @@
           <div class="chidrenList">
             <ul>
               <li class="addressList"
-                  v-for="(item,i) in addressShi"
+                  v-for="(item,i) in addressShi" :key="i"
                   @click="hide(item.CityName,item.CityID)">{{item.CityName}}</li>
             </ul>
           </div>
@@ -122,7 +122,6 @@ export default Vue.extend({
       this.flag = true;
       this.isShow = true;
       this.addressFn();
-      console.log(this);
     },
     hide(item: any, id: any) {
       this.flag = false;
@@ -144,16 +143,6 @@ export default Vue.extend({
     },
     istopHide() {
       this.top = false;
-    },
-    changeaddress(id: any) {
-      console.log(1111);
-      // let { masg }: any = this;
-      // if (masg.indexOf(id) === -1) {
-      //   masg.push(id);
-      //   console.log(masg, 111111);
-      // }
-      // console.log(masg);
-      // this.masg = masg;
     },
     //点击询问底价
     over() {
