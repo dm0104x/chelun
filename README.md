@@ -26,7 +26,7 @@
 
 ## chelun 本地部署
 
-> 1. git clone https://github.com/Peroluo/easyMarketApp.git
+> 1. git clone https://github.com/dm0104x/chelun.git
 > 2. 安装依赖 cnpm install
 > 3. 修改 package.json 文件中 proxy 字段的值 = 你本地服务器的 ip 地址 （"proxy": "http://127.0.0.1:8888"）
 > 4. 如果老铁不会在本地部署服务端，可以将第三步的 ip 地址，改成我部署的服务 ip 地址（"proxy": "http://202.96.155.121:8888"）,我部署的服务比较低级，避免挂掉，各位老铁，还是在你本地部署个吧~
